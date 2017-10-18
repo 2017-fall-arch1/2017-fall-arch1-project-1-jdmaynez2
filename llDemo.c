@@ -18,24 +18,24 @@ int gets_n(char *s, int limit)
   return (p - s);		/* #chars read (not including terminator or \n*/
 }
 
-int main()
-{
+void main(){
+  Tree *tree = treeAlloc();//creates the list
   char buf[100];
-  LList *lp = llAlloc();	/* make empty list */
-
-  llPrint(lp, "List contents, prior to reading input:");
-
-  while (gets_n(buf, 100))	/* build list */
-    llPut(lp, buf);
-
-  llPrint(lp, "List contents, after building list:");
-
-  llMakeEmpty(lp);
-
-  printf("After emptying the list...");
-  llPrint(lp, 0);		/* default message */
-
-  llFree(lp);
-
-  return 0;
+  while(strcmp(buf, "done") != 0){
+      
+      printf("Enter name of employee or enter \"done\" to exit\n");
+      gets_n(buf, 100);
+      if(strcmp(buf, "done") == 0)break;
+      makeNode(tree, buf);
+    }
+    print(tree);
+    /*printf("What is the name of the employee you wish to remove\n");
+    scanf("%s", buf);
+    Node *temp = findNode(tree, buf);*/
+    deleteNode(tree->root);
+    printf("\n");
+    print(tree);
+    createFile(tree);
+    readFile();
+    
 }

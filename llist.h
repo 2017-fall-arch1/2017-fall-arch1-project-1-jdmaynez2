@@ -1,36 +1,38 @@
+
+
 #ifndef llist_included		/* prevent multiple inclusion */
 #define llist_included
 
+typedef struct Node{
+    struct Node *right, *left;
+    char *str;
+}Node;
 
-/* a linked-list item */
-typedef struct LLItem_s {
-  struct LLItem_s *next; 
-  char *str;
-} LLItem;
+typedef struct{
 
-/* a list of LLItems */
-typedef struct {
-  LLItem *first, *last;
-} LList;
+    Node *root;
+}Tree;
 
-extern int llDoCheck;		/* set true for paranoid consistency checking */
+Node * addNode(Node *root, Node *newNode);
+Tree * treeAlloc(); 
+void makeNode(Tree *binTree, char *s);
+void print(Tree *root);
+void treePrint(Node *root);
+//void remove(Node *node);
+void deleteNode(Node *node);
+char* removeNode(int i, Node *node);
 
-/* create a new list */
-LList *llAlloc();
+void readFile();
+void createFile(Tree *tree);
+void writeFile(Node *node, FILE *file);
 
-/* free memory associated with a list, discarding all items it contains */
-void llFree(LList *lp);
+//Node* findNode(Tree *tree, char *str);
+//Node* searchNode(Node *root, char *s);
 
-/* append a copy of str to end of list */
-void llPut(LList *lp, char *s);
 
-/* Delete all elements off of the list */
-void llMakeEmpty(LList *lp);
+//xtern int llDoCheck;		/* set true for paranoid consistency checking */
 
-/* print list membership.  Prints default mesage if message is NULL */
-void llPrint(LList *lp, char *msg);
 
-/* check llist consistency, always returns zero */
-int llCheck(LList *lp);
+
 
 #endif	/* included */
